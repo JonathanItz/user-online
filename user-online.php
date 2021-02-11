@@ -45,14 +45,16 @@ class LiveUser {
 
         add_filter( 'heartbeat_received', [ $this, 'user_online_heartbeat' ], 10, 2 );
         add_filter( 'heartbeat_nopriv_received', [ $this, 'user_online_heartbeat' ], 10, 2 );
+
+        add_action( 'template_redirect', [ $this, 'update_user_status' ] );
     }
 
     public function user_online_javascript() {
-        wp_register_script( 'user_online_javascript', $this->plugin_directory . '/main.js', [ 'jquery', 'heartbeat' ], false, false);
+        wp_register_script( 'user_online_javascript', $this->plugin_directory . '/main.js', [ 'jquery', 'heartbeat' ], false, false );
         wp_enqueue_script( 'user_online_javascript' );
     }
 
-    public function is_user_online( int $user_id = 0 ) {
+    public static function is_user_online( int $user_id = 0 ) {
 
         // Check if the current user is the user we're checking to be online
         $is_users_id = false;
@@ -86,6 +88,10 @@ class LiveUser {
 
         // Return true cause we know the current user is online
         return true;
+    }
+
+    public function update_user_status() {
+        if( $user_id = get_current_user_id() ) self::is_user_online( $user_id );
     }
 
     /**
