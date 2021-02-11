@@ -1,4 +1,4 @@
-# user-online
+# Live User
 Wordpress plugin that allows developers to easily show if users are actively online
 
 ### Steps to install
