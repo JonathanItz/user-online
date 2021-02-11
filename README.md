@@ -7,4 +7,4 @@ Wordpress plugin that allows developers to easily show if users are actively onl
 3. Once done, you will be able to add code like `live_user()->is_user_online( $author_id );` to your theme and check if a user is currently online.
 
 ### Upcoming features
-* Live status that will update the users status if are online or offline
+* Show Live status that will update the users status if they are actively online or offline
